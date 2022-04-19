@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  
+  <div class="container-fluid d-flex flex-column centdiv ">
+    <div class="d-flex justify-content-center">
+      <h2 class="text-center">Login</h2><br>
+    </div>
+    <div class="">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    
+        <div>
+          <label class="ps-2 pb-2">
+            Username <br>
+            <input formControlName="Username" placeholder="User name" class=" mt-2">
+          </label>
+          <div *ngIf="myForm.get('Username').invalid && (myForm.get('Username').dirty || myForm.get('Username').touched)">
+            <span class="text-danger ps-2 pb-2">Please provide  Username</span>
+          </div>
+        </div>
+        <div>
+          <label class="ps-2 pt-2 pb-2">
+            Password <br>
+            <input formControlName="password" placeholder="Password"class="mt-2 ">
+          </label>
+          <div *ngIf="myForm.get('password').invalid && (myForm.get('password').dirty || myForm.get('password').touched)">
+            <span class="text-danger ps-2 mb-2">Please provide password(minimum 8 characters long)</span>
+          </div>
+        </div>
+        <button type="submit" [disabled]="myForm.invalid"class="btn btn-primary ms-2 mt-2 mb-2">Login</button>
+        </form>
+    </div>
+  </div>
+</div>

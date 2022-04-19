@@ -1,0 +1,105 @@
+<div class="container-fluid p-5 border-2 ">
+  <div class="container-fluid pb-4">
+    <h1><p class="text-info">Order Management System</p></h1>
+    <div class="align">
+      <button class="btn btn-primary" (click)="start(newmodal)">New Order</button>
+    </div>
+  </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Order Number</th>
+            <th scope="col">Order Due Date</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Customer Address</th>
+            <th scope="col">Customer Phone Number</th>
+            <th scope="col">Order Total</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let order of orders,let i=index">
+          <tr> 
+            <th scope="row">{{order.orderNumber}}</th>
+            <td>{{order.orderDueDate}}</td>
+            <td>{{order.Customername}}</td>
+            <td>{{order.CustomerAddress}}</td>
+            <td>{{order.CustomerPhone}}</td>
+            <td>{{order.OrderTotal}}</td>
+            <td>
+                <button (click)="DeleteClick(i)"  class="btn btn-danger">
+                    <span class="bi bi-trash-fill">Delete</span>
+                </button>
+            </td>
+            <td>
+                <button (click)="open(mymodal,i)" class="btn btn-success">
+                    <span>Edit</span>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     
+
+ <ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Order details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  
+       <div class="modal-body">
+          <span>Order Number</span><br>
+          <input type="text"  [(ngModel)]="ordNum"><br>
+          <span>Order Due Date</span><br>
+          <input type="text" [(ngModel)]="ordDueDate"><br>
+          <span>Customer Name</span><br>
+          <input type="text"  [(ngModel)]="cusName"><br>
+          <span>Customer Address</span><br>
+          <input type="text"  [(ngModel)]="cusAdd"><br>
+          <span>Customer Phone number</span><br>
+          <input type="text"  [(ngModel)]="cusNum"><br>
+          <span>Order Total</span><br>
+          <input type="text"  [(ngModel)]="ordTot">
+    
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="Submit(modal)">Edit</button>
+  </div>
+  
+ </ng-template>
+ 
+ 
+ <ng-template #newmodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Order details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm,modal)">
+        <div class="modal-body">
+        
+          <span>Order Number</span><br>
+          <input type="text" formControlName="orderNumber"><br>
+          <span>Order Due Date</span><br>
+          <input type="text" formControlName="orderDueDate"><br>
+          <span>Customer Name</span><br>
+          <input type="text" formControlName="Customername"><br>
+          <span>Customer Address</span><br>
+          <input type="text" formControlName="CustomerAddress"><br>
+          <span>Customer Phone number</span><br>
+          <input type="text" formControlName="CustomerPhone"><br>
+          <span>Order Total</span><br>
+          <input type="text" formControlName="OrderTotal">
+          
+        
+      
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark">Add</button>
+      
+    </div>
+  </form>
+
+  </ng-template>
+</div>
